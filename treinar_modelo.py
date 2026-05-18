@@ -100,11 +100,9 @@ logging.info('Verificando valores nulos...')
 
 print(base_dados.isnull().sum())
 
-# remover nulos
 
 base_dados = base_dados.dropna()
 
-# remover preços inválidos
 
 base_dados = base_dados[
     base_dados['preco'] > 0
@@ -114,14 +112,12 @@ base_dados = base_dados[
 # FEATURE ENGINEERING
 # ==========================================
 
-# banheiros por quarto
 
 base_dados['banheiros_por_quarto'] = (
     base_dados['banheiros'] /
     base_dados['quartos']
 )
 
-# idade categorizada
 
 base_dados['idade_categoria'] = pd.cut(
     base_dados['idade'],
@@ -148,8 +144,6 @@ X = base_dados[[
     'idade_categoria'
 ]]
 
-# log no preco
-# evita negativos
 
 y = np.log(
     base_dados[COLUNA_SAIDA]

@@ -18,7 +18,6 @@ if not os.path.exists(MODEL_PATH):
 
     sys.exit(1)
 
-# carregar modelo
 
 modelo = joblib.load(MODEL_PATH)
 
@@ -126,8 +125,6 @@ localizacao_opcao = pedir_numero(
     maximo=3
 )
 
-# converter para texto
-# compatível com OneHotEncoder
 
 mapa_localizacao = {
     1: 'Periferia',
@@ -176,14 +173,11 @@ dados = pd.DataFrame([{
 
 try:
 
-    # modelo treinado com LOG
     preco_log = modelo.predict(dados)[0]
 
-    # voltar escala original
 
     preco_previsto = np.exp(preco_log)
 
-    # impedir valores negativos
 
     preco_previsto = max(
         preco_previsto,
